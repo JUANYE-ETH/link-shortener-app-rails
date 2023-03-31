@@ -39,6 +39,26 @@ shortenBtn.addEventListener("click", async () => {
 				if (contentType && contentType.includes("application/json")) {
 					const data = await response.json();
 					shortenedUrlElement.textContent = `Shortened URL: ${data.short_url}`;
+
+					// Create a clickable link and set the URL
+					const link = document.createElement("a");
+					link.href = data.short_url;
+					link.textContent = data.short_url;
+
+					// Add a click event listener to copy the link to the clipboard
+					link.addEventListener("click", (event) => {
+						event.preventDefault();
+						copyToClipboard(data.short_url);
+						alert("Shortened URL copied to clipboard.");
+					});
+
+					// Clear the previous link if it exists
+					while (shortenedUrlElement.firstChild) {
+						shortenedUrlElement.removeChild(shortenedUrlElement.firstChild);
+					}
+
+					// Append the new link
+					shortenedUrlElement.appendChild(link);
 				} else {
 					console.error("Unexpected content type:", contentType);
 					alert("An error occurred. Please try again.");
@@ -58,3 +78,12 @@ shortenBtn.addEventListener("click", async () => {
 		alert("Please enter a valid URL.");
 	}
 });
+
+function copyToClipboard(text) {
+	const textarea = document.createElement("textarea");
+	textarea.value = text;
+	document.body.appendChild(textarea);
+	textarea.select();
+	document.execCommand("copy");
+	document.body.removeChild(textarea);
+}
