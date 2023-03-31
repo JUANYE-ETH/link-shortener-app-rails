@@ -6,7 +6,7 @@ A simple, user-friendly Link Shortener App built using Ruby on Rails, JavaScript
 - Responsive design for compatibility with various devices
 - User-friendly interface with a clean and professional appearance
 - Fast and efficient URL shortening using unique alphanumeric codes
-- Easy copy and share functionality for the generated shortened URLs
+- Clickable shortened URLs that automatically copy to clipboard when clicked
 - Designed with mobile responsiveness and cross-device compatibility
 
 ## Ruby version
@@ -14,7 +14,7 @@ A simple, user-friendly Link Shortener App built using Ruby on Rails, JavaScript
 - Rails 7.0.4.3
 
 ## System dependencies
-- sqlite3
+- PostgreSQL
 
 ## Configuration
 1. Clone the repository or download the source code as a ZIP file.
@@ -37,7 +37,7 @@ No additional services are utilized in this application.
 1. Start the Rails server by running `rails server`.
 2. Open your web browser and navigate to `localhost:3000` to access the app.
 3. Enter a long URL in the input field and click the "Shorten" button.
-4. The shortened URL will be displayed on the screen. Copy and share the link as needed.
+4. The shortened URL will be displayed as a clickable link. Click the link to copy it to your clipboard.
 
 ## Created By
 Juan (Juanye)
