@@ -28,15 +28,21 @@ shortenBtn.addEventListener("click", async () => {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
-					// Include the CSRF token in the request headers
+					Accept: "application/json",
 					"X-CSRF-Token": csrfToken,
 				},
 				body: JSON.stringify({ original_url: originalUrl }),
 			});
 
 			if (response.ok) {
-				const data = await response.json();
-				shortenedUrlElement.textContent = `Shortened URL: ${data.short_url}`;
+				const contentType = response.headers.get("content-type");
+				if (contentType && contentType.includes("application/json")) {
+					const data = await response.json();
+					shortenedUrlElement.textContent = `Shortened URL: ${data.short_url}`;
+				} else {
+					console.error("Unexpected content type:", contentType);
+					alert("An error occurred. Please try again.");
+				}
 			} else {
 				const error = await response.json();
 				const errorMessage = error.error.join("\n");
