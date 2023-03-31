@@ -45,7 +45,9 @@ shortenBtn.addEventListener("click", async () => {
 				}
 			} else {
 				const error = await response.json();
-				const errorMessage = error.error.join("\n");
+				const errorMessage = Array.isArray(error.error)
+					? error.error.join("\n")
+					: error.error;
 				alert("Error:\n" + errorMessage);
 			}
 		} catch (error) {
